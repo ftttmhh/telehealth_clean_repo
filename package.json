@@ -1,6 +1,7 @@
 {
   "name": "backend-new",
   "version": "1.0.0",
+  "type": "commonjs",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,5 +20,8 @@
     "openai": "^4.90.0",
     "twilio": "^5.5.1",
     "ws": "^8.18.1"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
