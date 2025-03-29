@@ -1,8 +1,20 @@
-// This file serves as an entry point for Render
-// It requires app.js as a CommonJS module
+// This file serves as a simple entry point for Render
+// It executes app.js as a separate process
 
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
+const { spawn } = require('child_process');
 
-// Require your app.js file
-require('./app.js'); 
+console.log('Starting app.js via child process...');
+const child = spawn('node', ['app.js'], { stdio: 'inherit' });
+
+child.on('close', (code) => {
+  console.log(`Child process exited with code ${code}`);
+  process.exit(code);
+});
+
+process.on('SIGINT', () => {
+  child.kill('SIGINT');
+});
+
+process.on('SIGTERM', () => {
+  child.kill('SIGTERM');
+}); 
